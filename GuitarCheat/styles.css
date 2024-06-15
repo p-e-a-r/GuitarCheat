@@ -1,0 +1,113 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Barlow";
+    color: #0D1718;
+    background-color: #FAFAFA;
+}
+.title-section{
+    margin: 3.2vh 4.8vh;
+}
+.title-container{
+    display: flex;
+    align-items: center;
+    font-size: 1.2vh;
+    gap: 0.8vh;
+    text-align: center;
+}
+h1{
+    font-weight: 500;
+}
+.circle{
+    width: 8px;
+    height: 8px;
+    background-color: #467981;
+    border-radius: 50%;
+}
+.img-section{
+    position: relative;
+}
+.img-cont{
+    width: 100%;
+    height: 45vh;
+    object-fit: contain;
+    overflow: hidden;
+    position: relative;
+}
+.img{
+    width: 120%;
+    position: absolute;
+    left: -20%;
+    top: -40%;
+    z-index: 1;
+}
+.settings-section{
+    margin-left: 100px;
+    margin-top: 32px;
+}
+
+.display-settings-cont{
+    display: flex;
+    gap: 80px;
+    position: absolute;
+    top: 25vh;
+    left: 30vh;
+    z-index: 2;
+}
+.s2{
+    top: 50vh;
+    left: 60vh;
+    gap: 120px;
+    z-index: 2;
+}
+.setting-radio{
+    margin-bottom: 24px;
+    font-size: 20px;
+    font-weight: 550;
+}
+.setting-buttons{
+    width: 190px;
+    display: flex;
+    align-items: center;
+}
+.btn-cont {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(7, auto);
+    gap: 8px 12px;
+}
+.btn-cont-2{
+    padding-left: 20px;
+}
+.keytype{
+    margin-bottom: 8px;
+}
+
+.setting{
+    background-color: white;
+    border: 2px solid #467981;
+    border-radius: 3px;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 4px 20px;
+    cursor: pointer;
+}
+/*.setting:hover{
+    color: white;
+    background-color: #467981;
+    transition: 0.15s ease-in-out;
+}*/
+.pressed{
+    color: white;
+    background-color: #467981;
+}
+
+#neck-grid{
+    position: absolute;
+    z-index: 3;
+    /*clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 86%);*/
+    top: 28%;
+    left: 10%;
+    background: none;
+}
