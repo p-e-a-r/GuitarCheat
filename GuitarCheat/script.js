@@ -11,8 +11,8 @@ neckGrid.height = 180;
 // Define the width of each fret
 const fretWidths = [140,120, 120, 116, 113, 110, 107, 103.5, 100.5, 98, 96, 93, 90.5, 88, 86, 83.5, 81.5, 79.5, 77.5, 75.6, 74, 72.2, 70.5]; 
 const cellHeight = neckGrid.height / rows
-
-const fontSize = 16;
+let newNotes = [];
+const fontSize = 18;
 const padding = 6;
 const borderRadius = 15;
 let noteHight;
@@ -47,9 +47,9 @@ buttons.forEach(button => {
            
         // press the button
         togglePress(button) 
-        getNotes(button)
         
-        test(newNotes)
+        newNotes = getNotes(button)
+        drawScale();
     
     })
 })
@@ -82,91 +82,46 @@ function getNotes(button){
 }
 
 
-// Define notes on a neck
 
-for(let i = 0; i < rows; i++){
-    grid[i] = []
-    // E String
-    if( i == 0 || i ==5){
-        for(let j = 0; j <= cols; j++){
-            grid[i][j] = string[j % string.length]
-        }
-    }// B String
-        else if( i == 1){
-        for(let j = 0; j <= cols; j++){
-            grid[i][j] = string[(j + 7) % string.length]
-        }
-    }// G String
-        else if( i == 2){
-        for(let j = 0; j <= cols; j++){
-            grid[i][j] = string[(j + 3) % string.length]
-        }
-    }// D String
-        else if( i == 3){
-        for(let j = 0; j <= cols; j++){
-            grid[i][j] = string[(j + 10) % string.length]
-        }
-    }// A String
-        else if( i == 4){
-        for(let j = 0; j <= cols; j++){
-            grid[i][j] = string[(j + 5) % string.length]
-        }
-    }
-}
+const neckNotes = [ ["F","F#","G","G#","A","A#","B","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C","C#","D","D#"],
+                    ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C","C#","D","D#","E","F","F#","G","G#","A","A#"],
+                    ["G#","A","A#","B","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C","C#","D","E","F","F#","G"],
+                    ["D#","E","F","F#","G","G#","A","A#","B","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C","C#"],
+                    ["A#","B","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C","C#","D","D#","E","F","G","G#","A"],
+                    ["F","F#","G","G#","A","A#","B","C","C#","D","D#","E","F","F#","G","G#","A","A#","B","C","C#","D","D#"]]
 
 
 
 
 
-
-
-/*
-    WYKMINIC INACZEJ
-
-function test(){  
-    
-    ctx.clearRect(0, 0, neckGrid.width, neckGrid.height);
-    for(let i = 0; i < rows; i++){
-        
+for(let i = 0; i < rows; i ++){
+    grid[i] = neckNotes[i];
     for(let j = 0; j < cols; j++){
-        
-        // Set the font size for the canvas context
         ctx.font = fontSize + 'px Arial'; 
-        noteHight = cellHeight * i
-        noteWidth = fretWidths[j] * j
-        if(j <= 4){
-                noteHight += 22
-                noteWidth += 50
-            } else if( j > 4 && j <= 9) {
-                noteHight += 22
-                noteWidth += 35
-            } else if( j > 9 && j <= 12) {
-                noteHight += 20
-                noteWidth += 20
-            } else if( j > 12 && j <= 16) {
-                noteHight += 20
-                noteWidth += 20
-            }  else if( j > 16 && j <= 19) {
-                noteHight += 20
-                noteWidth += 15
-            } else if( j > 19) {
-                noteHight += 20
-                noteWidth += 10
-            }
-       if(newNotes.includes(grid[i][j])){
- 
-            console.log(grid)
-        
-        
-       drawNotes(ctx, grid[i][j], noteWidth, noteHight);
+                noteHight = cellHeight * i
+                noteWidth = fretWidths[j] * j
+                if(j <= 4){
+                        noteHight += 22
+                        noteWidth += 50
+                    } else if( j > 4 && j <= 9) {
+                        noteHight += 22
+                        noteWidth += 35
+                    } else if( j > 9 && j <= 12) {
+                        noteHight += 20
+                        noteWidth += 20
+                    } else if( j > 12 && j <= 16) {
+                        noteHight += 20
+                        noteWidth += 20
+                    }  else if( j > 16 && j <= 19) {
+                        noteHight += 20
+                        noteWidth += 15
+                    } else if( j > 19) {
+                        noteHight += 20
+                        noteWidth += 10
+                    }
     }
-        // zrobic to samo co wyzej, tylko zeby wykrywal b keys.
     
-        }   
 }
-
-}
-
 
 function drawNotes(ctx, text, x, y) {
 
@@ -203,6 +158,24 @@ function drawNotes(ctx, text, x, y) {
     ctx.fillStyle = "white"; // Text color
     ctx.fillText(text, x, y);
    
+   
+
+}
 
 
-}*/
+
+function drawScale() {
+    ctx.clearRect(0, 0, neckGrid.width, neckGrid.height);
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
+            noteHight = cellHeight * i + (j <= 4 ? 22 : j <= 9 ? 22 : j <= 12 ? 20 : j <= 16 ? 20 : j <= 19 ? 20 : 20);
+            noteWidth = fretWidths[j] * j + (j <= 4 ? 50 : j <= 9 ? 35 : j <= 12 ? 20 : j <= 16 ? 20 : j <= 19 ? 15 : 10);
+
+            if (newNotes.includes(grid[i][j])) {
+                drawNotes(ctx, grid[i][j], noteWidth, noteHight);
+            }
+        }
+    }}
+
+
+
