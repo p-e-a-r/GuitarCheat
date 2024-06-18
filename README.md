@@ -12,7 +12,7 @@ Go live: <br>
 
 Selection of: <br>
 / <strike>Key</strike> <br>
-/ Scale <br>
+/ <strike>Scale</strike> <br>
 / Arrpegio <br>
 / Pattern <br>
 / Metronome <br>
